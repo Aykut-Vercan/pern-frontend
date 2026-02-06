@@ -12,11 +12,11 @@ import { Toaster } from "./components/refine-ui/notification/toaster";
 import { useNotificationProvider } from "./components/refine-ui/notification/use-notification-provider";
 import { ThemeProvider } from "./components/refine-ui/theme/theme-provider";
 import { dataProvider } from "./providers/data";
-import Dashboard from "./pages/dashboard";
 import { BookOpen, Home } from "lucide-react";
 import { Layout } from "./components/refine-ui/layout/layout";
-import SubjectList from "./pages/subjects/list";
-import SubjectsCreate from "./pages/subjects/create";
+import SubjectList from "./pages/subjects/SubjectList";
+import SubjectsCreate from "./pages/subjects/SubjectsCreate";
+import Dashboard from "./pages/Dashboard";
 
 function App() {
   return (
@@ -41,7 +41,7 @@ function App() {
                 }, {
                   name: 'subjects',
                   list: '/subjects',
-                  create: '/subject/create',
+                  create: '/subjects/create',
                   meta: { label: 'Subjects', icon: <BookOpen /> }
                 },
               ]}
