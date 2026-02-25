@@ -27,14 +27,14 @@ const options: CreateDataProviderOptions = {
     },
 
     mapResponse: async (response) => {
-      const payload: ListResponse = await response.json();
+      const payload: ListResponse = await response.clone().json();
       // Your API returns: { data: [...], total: 123 }
       // Refine needs: [...]
       return payload.data ?? [];
     },
 
     getTotalCount: async (response) => {
-      const payload: ListResponse = await response.json();
+      const payload: ListResponse = await response.clone().json();
       // Your API returns: { data: [...], total: 123 }
       // Refine needs: 123
       return payload.pagination?.total ?? payload.data?.length ?? 0;
