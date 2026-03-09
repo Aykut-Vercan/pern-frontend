@@ -11,13 +11,15 @@ import "./App.css";
 import { Toaster } from "./components/refine-ui/notification/toaster";
 import { useNotificationProvider } from "./components/refine-ui/notification/use-notification-provider";
 import { ThemeProvider } from "./components/refine-ui/theme/theme-provider";
-import { BookOpen, Home } from "lucide-react";
+import { BookOpen, GraduationCap, Home } from "lucide-react";
 import { Layout } from "./components/refine-ui/layout/layout";
 import SubjectList from "./pages/subjects/SubjectList";
 import SubjectsCreate from "./pages/subjects/SubjectsCreate";
-import Dashboard from "./pages/Dashboard";
+import Dashboard from "@/pages/Dashboard";
 
 import { dataProvider } from "./providers/data";
+import ClassesList from "@/pages/classes/ClassesList";
+import ClassesCreate from "@/pages/classes/ClassesCreate";
 
 function App() {
   return (
@@ -39,11 +41,18 @@ function App() {
                   name: 'dashboard',
                   list: '/',
                   meta: { label: 'Home', icon: <Home /> }
-                }, {
+                },
+                {
                   name: 'subjects',
                   list: '/subjects',
                   create: '/subjects/create',
                   meta: { label: 'Subjects', icon: <BookOpen /> }
+                },
+                {
+                  name: 'classes',
+                  list: '/classes',
+                  create: '/classes/create',
+                  meta: { label: 'Classes', icon: <GraduationCap /> }
                 },
               ]}
             >
@@ -58,6 +67,10 @@ function App() {
                   <Route path='subjects' >
                     <Route index element={<SubjectList />} />
                     <Route path="create" element={<SubjectsCreate />} />
+                  </Route>
+                  <Route path='classes' >
+                    <Route index element={<ClassesList />} />
+                    <Route path="create" element={<ClassesCreate />} />
                   </Route>
                 </Route>
               </Routes>
