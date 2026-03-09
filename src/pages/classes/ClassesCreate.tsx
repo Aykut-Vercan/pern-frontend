@@ -133,7 +133,9 @@ const ClassesCreate = () => {
                         />
                       </FormControl>
                       <FormMessage />
-                      {errors.bannerCldPubId && !errors.bannerUrl && (<p className="text-destructive text-sm">{errors.bannerCldPubId.message?.toString()}</p>)}
+                      {errors.bannerCldPubId &&
+                        !errors.bannerUrl &&
+                        (<p className="text-destructive text-sm">{errors.bannerCldPubId.message?.toString()}</p>)}
                     </FormItem>
                   )}
                 />
@@ -267,8 +269,8 @@ const ClassesCreate = () => {
                             <SelectItem value="active">Active</SelectItem>
                             <SelectItem value="inactive">Inactive</SelectItem>
                           </SelectContent>
-                          <FormMessage />
                         </Select>
+                        <FormMessage />
                       </FormItem>
                     )}
                   />

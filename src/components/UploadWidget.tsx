@@ -30,7 +30,7 @@ const UploadWidget = ({ value = null, onChange, disabled = false }: UploadWidget
                 cloudName: CLOUDINARY_CLOUD_NAME,
                 uploadPreset: CLOUDINARY_UPLOAD_PRESET,
                 multiple: false,
-                maxFileSize: 500000,
+                maxFileSize: 5000000,
                 clientAllowedFormats: ['png', 'jpg', 'jpeg', 'webp'],
                 return_delete_token: true
             }, (error, result) => {
@@ -70,15 +70,21 @@ const UploadWidget = ({ value = null, onChange, disabled = false }: UploadWidget
         if (!deleteToken) return
         setIsRemoving(true)
         try {
-            await fetch(`https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/delete_by_token`, {
+            const response = await fetch(`https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/delete_by_token`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ token: deleteToken })
             })
 
-            setPreview(null)
-            setDeleteToken(null)
-            onChangeRef.current?.(null)
+            if (response.ok) {
+                setPreview(null);
+                setDeleteToken(null);
+                onChangeRef.current?.(null)
+            } else {
+                const errData = await response.json();
+                console.error("Cloudinary deletion failed:", errData);
+            }
+
         } catch (error) {
             console.error("Failed to remove image", error)
         } finally {
