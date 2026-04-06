@@ -35,11 +35,7 @@ const ClassesCreate = () => {
     control } = form;
 
   const onSubmit = async (values: z.infer<typeof classSchema>) => {
-    try {
-      await onFinish(values);
-    } catch (error) {
-      console.log("Error creating new classes", error);
-    }
+    await onFinish(values);
   };
 
   const { query: subjectsQuery } = useList<Subject>({

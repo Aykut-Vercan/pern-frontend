@@ -4,6 +4,7 @@ import { CreateResponse, ListResponse } from '@/types';
 import { HttpError } from '@refinedev/core';
 import { createDataProvider, CreateDataProviderOptions } from '@refinedev/rest';
 
+//Refine'ın backend'inle konuşma köprüsü. 
 
 const buildHttpError = async (response: Response): Promise<HttpError> => {
   let message = 'Request failed.'
@@ -40,6 +41,11 @@ const options: CreateDataProviderOptions = {
         if (resource === 'users') {
           if (field === 'role') params.role = value
           if (field === 'name' || field === 'email') params.search = value
+        }
+        if (resource === 'classes') {
+          if (field === 'name') params.search = value
+          if (field === 'subject') params.subject = value
+          if (field === 'teacher') params.teacher = value
         }
       })
 
