@@ -49,9 +49,13 @@ const ClassesShow = () => {
         <ShowView className="class-view class-show">
             <ShowViewHeader resource="classes" title={name} />
             <div className="banner">
-                {bannerUrl ?
-                    <AdvancedImage alt="Class Banner" cldImg={bannerPhoto(bannerCldPubId ?? '', name)} /> :
-                    <div className="placeholder" />}
+                {bannerCldPubId ? (
+                    <AdvancedImage alt="Class Banner" cldImg={bannerPhoto(bannerCldPubId, name)} />
+                ) : bannerUrl ? (
+                    <img src={bannerUrl} alt="Class Banner" className="w-full h-full object-cover" />
+                ) : (
+                    <div className="placeholder" />
+                )}
             </div>
             <Card className="details-card">
                 <div className="details-header">

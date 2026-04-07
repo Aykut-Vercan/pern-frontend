@@ -75,16 +75,19 @@ const options: CreateDataProviderOptions = {
 
     mapResponse: async (response) => {
       if (!response.ok) throw await buildHttpError(response)
-      const json: CreateResponse = await response.clone().json();
+      const json: CreateResponse = await response.json();
       return json.data ?? {};
     },
   },
-  getOne:{
+  getOne: {
     getEndpoint: ({ resource, id }) => `${resource}/${id}`,
     mapResponse: async (response) => {
       if (!response.ok) throw await buildHttpError(response)
-      const json: GetOneResponse = await response.clone().json();
-      return json.data ?? [];
+      const json: GetOneResponse = await response.json();
+      if (!json.data) {
+        throw { message: 'Record not found.', statusCode: 404 } as HttpError;
+      }
+      return json.data;
     },
   }
 }
