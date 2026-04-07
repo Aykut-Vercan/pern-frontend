@@ -12,6 +12,7 @@ import { Badge } from "@/components/ui/badge";
 import { useMemo, useState } from "react";
 import { useList } from "@refinedev/core"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { ShowButton } from "@/components/refine-ui/buttons/show"
 
 const ClassesList = () => {
   const [searchQuery, setSearchQuery] = useState('');
@@ -52,7 +53,7 @@ const ClassesList = () => {
     {
       id: 'banner',
       accessorKey: 'bannerUrl',
-      size: 80,
+      size: 60,
       header: () => <p className="column-title ml-2">Banner</p>,
       cell: ({ getValue }) => {
         const url = getValue<string>();
@@ -79,7 +80,7 @@ const ClassesList = () => {
     {
       id: 'subject',
       accessorKey: 'subject.name',
-      size: 100,
+      size: 120,
       header: () => <p className="column-title ml-2">Subject</p>,
       cell: ({ getValue }) => <Badge>{getValue<string>()}</Badge>,
       filterFn: 'includesString'
@@ -103,7 +104,7 @@ const ClassesList = () => {
     {
       id: 'status',
       accessorKey: 'status',
-      size: 100,
+      size: 80,
       header: () => <p className="column-title ml-4">Status</p>,
       cell: ({ getValue }) => {
         const status = getValue<string>();
@@ -118,7 +119,7 @@ const ClassesList = () => {
     {
       id: 'inviteCode',
       accessorKey: 'inviteCode',
-      size: 120,
+      size: 100,
       header: () => <p className="column-title ml-2">Invite Code</p>,
       cell: ({ getValue }) => <Badge variant="outline">{getValue<string>()}</Badge>,
       filterFn: 'includesString'
@@ -131,6 +132,14 @@ const ClassesList = () => {
       cell: ({ getValue }) => <span className="truncate line-clamp-2">{getValue<string>()}</span>,
       filterFn: 'includesString'
     },
+    {
+      id: 'details',
+      size: 100,
+      header: () => <p className="column-title ml-2">Details</p>,
+      cell: ({ row }) => <ShowButton resource="classes" recordItemId={row.original.id} size="sm" variant="outline">
+        View
+        </ShowButton>
+    }
   ], [])
 
   const classTable = useTable<ClassDetails>({
