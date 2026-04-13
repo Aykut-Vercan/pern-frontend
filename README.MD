@@ -1,48 +1,73 @@
-# classroom-frontend
+# Classroom Frontend
 
-<div align="center" style="margin: 30px;">
-    <a href="https://refine.dev">
-    <img alt="refine logo" src="https://refine.ams3.cdn.digitaloceanspaces.com/readme/refine-readme-banner.png">
-    </a>
-</div>
-<br/>
+Admin and student dashboard for the Classroom management application. Built as a full-featured CRUD interface with charts, tables, and role-based views.
 
-This [Refine](https://github.com/refinedev/refine) project was generated with [create refine-app](https://github.com/refinedev/refine/tree/master/packages/create-refine-app).
+## Tech Stack
+
+| Tool | Purpose |
+|------|---------|
+| **React 19 + TypeScript** | UI framework |
+| **Vite** | Build tool and dev server |
+| **Refine** | CRUD framework (data fetching, routing, auth) |
+| **React Router 7** | Client-side routing |
+| **TanStack Table** | Data tables with sorting, filtering, pagination |
+| **TanStack Query** | Server state management |
+| **React Hook Form + Zod** | Forms and validation |
+| **Tailwind CSS v4** | Utility-first styling |
+| **shadcn/ui + Radix UI** | UI component library |
+| **Recharts** | Charts and data visualization |
+| **Better Auth** | Authentication client |
+| **Cloudinary** | Image uploads (profile photos, class banners) |
+
+## Project Structure
+
+```
+src/
+├── pages/
+│   ├── Dashboard.tsx         # Home page with stats and charts
+│   ├── departments/          # List, show, create
+│   ├── subjects/             # List, show, create
+│   ├── classes/              # List, show, create
+│   ├── enrollments/          # Enroll by select or invite code
+│   ├── faculty/              # User list and profile view
+│   └── login / register/     # Auth pages
+├── components/
+│   ├── refine-ui/            # Layout, tables, buttons, forms
+│   └── ui/                   # shadcn base components
+├── providers/
+│   ├── auth.ts               # Refine auth provider
+│   └── data.ts               # Refine data provider (REST)
+└── App.tsx                   # Routes and resource definitions
+```
+
+## Pages
+
+| Page | Description |
+|------|-------------|
+| **Dashboard** | KPI cards, role pie chart, bar charts, newest classes and teachers |
+| **Departments** | List with search, detail view with subjects and classes |
+| **Subjects** | List with filters, detail view with classes and users |
+| **Classes** | List with subject/teacher filters, detail view with join instructions |
+| **Enrollments** | Enroll by selecting a class or entering an invite code |
+| **Faculty** | User list with role filter, profile view with associated departments and subjects |
 
 ## Getting Started
 
-A React Framework for building internal tools, admin panels, dashboards & B2B apps with unmatched flexibility ✨
-
-Refine's hooks and components simplifies the development process and eliminates the repetitive tasks by providing industry-standard solutions for crucial aspects of a project, including authentication, access control, routing, networking, state management, and i18n.
-
-## Available Scripts
-
-### Running the development server.
-
 ```bash
-    npm run dev
+# Install dependencies
+npm install
+
+# Set up environment variables
+cp .env.example .env
+
+# Start development server
+npm run dev
 ```
 
-### Building for production.
+## Environment Variables
 
-```bash
-    npm run build
+```env
+VITE_BACKEND_BASE_URL=http://localhost:8000/api
+VITE_CLOUDINARY_CLOUD_NAME=your-cloud-name
+VITE_CLOUDINARY_UPLOAD_PRESET=your-upload-preset
 ```
-
-### Running the production server.
-
-```bash
-    npm run start
-```
-
-## Learn More
-
-To learn more about **Refine**, please check out the [Documentation](https://refine.dev/docs)
-
-- **REST Data Provider** [Docs](https://refine.dev/docs/core/providers/data-provider/#overview)
-- **shadcn/ui** [Docs](https://refine.dev/docs/guides-concepts/general-concepts/#headless-concept)
-- **React Router** [Docs](https://refine.dev/docs/core/providers/router-provider/)
-
-## License
-
-MIT

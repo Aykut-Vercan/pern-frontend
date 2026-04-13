@@ -11,6 +11,7 @@ import { ColumnDef } from "@tanstack/react-table"
 import { Search } from "lucide-react"
 import { Badge } from "@/components/ui/badge";
 import { useMemo, useState } from "react"
+import { ShowButton } from "@/components/refine-ui/buttons/show"
 
 
 const SubjectList = () => {
@@ -25,39 +26,62 @@ const SubjectList = () => {
         { field: 'name', operator: 'contains' as const, value: searchQuery }
     ] : [];
 
-    const subjectColumns = useMemo<ColumnDef<Subject>[]>(() => [
-        {
-            id: 'code',
-            accessorKey: 'code',
-            size: 100,
-            header: () => <p className="column-title ml-2">Code</p>,
-            cell: ({ getValue }) => <Badge>{getValue<string>()}</Badge>
-        },
-        {
-            id: 'name',
-            accessorKey: 'name',
-            size: 200,
-            header: () => <p className="column-title ml-2">Name</p>,
-            cell: ({ getValue }) => <span className="text-foreground">{getValue<string>()}</span>,
-            filterFn: 'includesString'
-        },
-        {
-            id: 'department',
-            accessorKey: 'department.name',
-            size: 150,
-            header: () => <p className="column-title ml-2">Department</p>,
-            cell: ({ getValue }) => <Badge variant="secondary">{getValue<string>()}</Badge>,
-            filterFn: 'includesString'
-        }, {
-            id: 'description',
-            accessorKey: 'description',
-            size: 300,
-            header: () => <p className="column-title ml-2">Description</p>,
-            cell: ({ getValue }) => <span className="truncate line-clamp-2">{getValue<string>()}</span>,
-            filterFn: 'includesString'
-        },
-    ], []);
-    
+    const subjectColumns = useMemo<ColumnDef<Subject>[]>(
+        () => [
+            {
+                id: "code",
+                accessorKey: "code",
+                size: 100,
+                header: () => <p className="column-title ml-2">Code</p>,
+                cell: ({ getValue }) => <Badge>{getValue<string>()}</Badge>,
+            },
+            {
+                id: "name",
+                accessorKey: "name",
+                size: 200,
+                header: () => <p className="column-title">Name</p>,
+                cell: ({ getValue }) => (
+                    <span className="text-foreground">{getValue<string>()}</span>
+                ),
+                filterFn: "includesString",
+            },
+            {
+                id: "department",
+                accessorKey: "department.name",
+                size: 150,
+                header: () => <p className="column-title">Department</p>,
+                cell: ({ getValue }) => (
+                    <Badge variant="secondary">{getValue<string>()}</Badge>
+                ),
+            },
+            {
+                id: "description",
+                accessorKey: "description",
+                size: 300,
+                header: () => <p className="column-title">Description</p>,
+                cell: ({ getValue }) => (
+                    <span className="truncate line-clamp-2">{getValue<string>()}</span>
+                ),
+            },
+            {
+                id: "details",
+                size: 140,
+                header: () => <p className="column-title">Details</p>,
+                cell: ({ row }) => (
+                    <ShowButton
+                        resource="subjects"
+                        recordItemId={row.original.id}
+                        variant="outline"
+                        size="sm"
+                    >
+                        View
+                    </ShowButton>
+                ),
+            },
+        ],
+        []
+    );
+
     const subjectTable = useTable<Subject>({
         columns: subjectColumns,
         refineCoreProps: {

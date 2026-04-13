@@ -96,7 +96,7 @@ const ClassesList = () => {
     {
       id: 'capacity',
       accessorKey: 'capacity',
-      size: 50,
+      size: 40,
       header: () => <p className="column-title">Capacity</p>,
       cell: ({ getValue }) => <span className="text-foreground">{getValue<number>()}</span>,
       filterFn: 'includesString'
@@ -127,7 +127,7 @@ const ClassesList = () => {
     {
       id: 'description',
       accessorKey: 'description',
-      size: 300,
+      size: 100,
       header: () => <p className="column-title ml-2">Description</p>,
       cell: ({ getValue }) => <span className="truncate line-clamp-2">{getValue<string>()}</span>,
       filterFn: 'includesString'
